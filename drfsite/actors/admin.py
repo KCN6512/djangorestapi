@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+class ActorAdmin(admin.ModelAdmin):
+    fields = ('title', 'cat', 'content', 'photo')
+
+admin.site.register(Actor,ActorAdmin)
+admin.site.register(Category)
