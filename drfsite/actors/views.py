@@ -8,10 +8,6 @@ from .serializers import *
 from .models import *
 
 
-# class ActorAPIView(generics.ListAPIView):
-#     queryset = Actor.objects.all()
-#     serializer_class = ActorSerializer
-
 class ActorAPIView(APIView):
     def get(self, request):
         lst = Actor.objects.all().values()#queryset не serializeble нужно values
