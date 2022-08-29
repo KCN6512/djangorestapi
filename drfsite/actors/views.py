@@ -1,3 +1,4 @@
+from webbrowser import get
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -13,10 +14,35 @@ class ActorAPIView(APIView):
     def post(self, request):
         serializer = ActorSerializer(data=request.data)#нужно указывать data=
         serializer.is_valid(raise_exception=True)#проверка валидности данных чтобы выдавалась ошибка не джанговская желтая, а json форматированная ошибка
+        serializer.save()#save вызывает create и сохраняет данные в бд
+        return Response({'post': serializer.data})#serializer.data ссылается на новый созданный объект
 
-        new_post = Actor.objects.create(
-            title=request.data['title'],
-            content=request.data['content'],
-            cat_id=request.data['cat_id']
-        )
-        return Response({'post': ActorSerializer(new_post).data})
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+
+        if not pk:
+            return Response({'error': 'Method PUT not allowed'})
+
+        try:
+            instance = Actor.objects.get(pk=pk)
+        except:
+            return Response({'error': 'Object does not exist'})
+
+        serializer = ActorSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'post': serializer.data}) 
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+
+        if not pk:
+            return Response({'error': 'Method DELETE not allowed'})
+
+        try:
+            instance = Actor.objects.get(pk=pk)
+        except:
+            return Response({'error': 'Object does not exist'})
+
+        instance.delete()
+        return Response({'deleted': str(instance)})
