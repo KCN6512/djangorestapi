@@ -41,8 +41,8 @@ class ActorAPIView(APIView):
 
         try:
             instance = Actor.objects.get(pk=pk)
+            instance.delete()
         except:
             return Response({'error': 'Object does not exist'})
 
-        instance.delete()
         return Response({'deleted': str(instance)})
