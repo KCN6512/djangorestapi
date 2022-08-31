@@ -3,10 +3,10 @@ from .models import *
 
 
 class ActorSerializer(serializers.ModelSerializer):
-    slug = serializers.CharField(max_length=255,read_only=True)
     class Meta:
         model = Actor
         fields = '__all__'
+        read_only_fields = ('slug',)
 
 
 class CategorySerializer(serializers.ModelSerializer):
