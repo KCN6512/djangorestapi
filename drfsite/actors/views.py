@@ -1,31 +1,14 @@
 from rest_framework.views import *
-from rest_framework.response import Response
-from rest_framework import generics
-
+from rest_framework import viewsets
 from .serializers import *
 from .models import *
 
-class ActorAPIList(generics.ListCreateAPIView):
+
+class ActorViewSet(viewsets.ModelViewSet):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
 
-class ActorAPIUpdate(generics.UpdateAPIView):
-    queryset = Actor.objects.all()
-    serializer_class = ActorSerializer
-
-
-class ActorCRUDAPI(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Actor.objects.all()
-    serializer_class = ActorSerializer
-
-
-class CategoryAPICRUD(generics.RetrieveUpdateDestroyAPIView):
+class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
-
-class CategoryAPIList(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-
