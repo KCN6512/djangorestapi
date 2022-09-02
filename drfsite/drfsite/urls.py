@@ -18,10 +18,9 @@ from django.urls import include, path
 from rest_framework import routers
 from actors.views import *
 
-router = routers.SimpleRouter()
-router.register(r'actors', ActorViewSet)
-router.register(r'categories', CategoryViewSet)
-
+router = routers.DefaultRouter()
+router.register(r'actors', ActorViewSet)#при отсутствии queryset во view нужно указать basename='name'
+print(router.urls)
 urlpatterns = [#закрывать url/
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
