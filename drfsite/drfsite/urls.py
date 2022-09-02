@@ -20,6 +20,7 @@ from actors.views import *
 
 router = routers.DefaultRouter()
 router.register(r'actors', ActorViewSet)#при отсутствии queryset во view нужно указать basename='name'
+router.register(r'category', CategoryViewSet)
 
 urlpatterns = [#закрывать url/
     path('admin/', admin.site.urls),
