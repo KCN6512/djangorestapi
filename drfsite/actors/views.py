@@ -13,7 +13,7 @@ from rest_framework.permissions import *
 class ActorAPIList(generics.ListCreateAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    #permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminUser]
 
 
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):

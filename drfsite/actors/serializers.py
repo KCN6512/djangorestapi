@@ -3,7 +3,7 @@ from .models import *
 
 
 class ActorSerializer(serializers.ModelSerializer):
-    category_name = serializers.CharField(source='cat.name',required=False)
+    category_name = serializers.CharField(source='cat.name',read_only=True)
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Actor
@@ -14,3 +14,15 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+
+# Validators
+# Individual fields on a serializer can include validators, by declaring them on the field instance, for example:
+
+# def multiple_of_ten(value):
+#     if value % 10 != 0:
+#         raise serializers.ValidationError('Not a multiple of ten')
+
+# class GameRecord(serializers.Serializer):
+#     score = IntegerField(validators=[multiple_of_ten])
+#     ...
