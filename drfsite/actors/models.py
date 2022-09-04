@@ -1,6 +1,6 @@
 from autoslug import AutoSlugField
 from django.db import models
-from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Actor(models.Model):
     title = models.CharField(max_length=255,verbose_name='Заголовок')
@@ -9,6 +9,7 @@ class Actor(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     cat = models.ForeignKey('Category',null=True,verbose_name='Категория',on_delete=models.SET_NULL)
     slug = AutoSlugField(populate_from='title',verbose_name='URL',unique=True,editable=True)
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.title
