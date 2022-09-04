@@ -18,11 +18,13 @@ from django.urls import include, path
 from rest_framework import routers
 from actors.views import *
 
-router = routers.DefaultRouter()
-router.register(r'actors', ActorViewSet)#при отсутствии queryset во view нужно указать basename='name'
-router.register(r'category', CategoryViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'actors', ActorViewSet)#при отсутствии queryset во view нужно указать basename='name'
+# router.register(r'category', CategoryViewSet)
 
 urlpatterns = [#закрывать url/
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('api/v1/actors/', ActorAPIList.as_view()),
+    path('api/v1/actors/<int:pk>/', ActorAPIUpdate.as_view()),
+    path('api/v1/actors/delete/<int:pk>/', ActorAPIDestroy.as_view()),
 ]

@@ -3,11 +3,12 @@ from .models import *
 
 
 class ActorSerializer(serializers.ModelSerializer):
-    category_name = serializers.CharField(source='cat.name')
+    category_name = serializers.CharField(source='cat.name',required=False)
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Actor
-        fields = ['title','content','time_create','time_update','cat', 'category_name']
-        read_only_fields = ('slug',)
+        fields = ['id', 'title', 'content', 'time_create', 'time_update', 'cat','slug','category_name','user']
+        read_only_fields = ('slug', 'category_name')
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
