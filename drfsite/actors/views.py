@@ -16,6 +16,7 @@ class ActorAPIList(generics.ListCreateAPIView):
     permission_classes = [IsAdminUser]
     
     def get_queryset(self): #получить queryset напрямую из класса self.queryset нельзя нужно использовать метод
+        #is_valid нужен для ДЕсериализации
         queryset = Actor.objects.all()
         serializered_queryset = ActorSerializer(queryset,many=True)
         return serializered_queryset.data
