@@ -27,4 +27,5 @@ urlpatterns = [#закрывать url/
     path('api/v1/actors/', ActorAPIList.as_view()),
     path('api/v1/actors/<int:pk>/', ActorAPIUpdate.as_view()),
     path('api/v1/actors/delete/<int:pk>/', ActorAPIDestroy.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
 ]

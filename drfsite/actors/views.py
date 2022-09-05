@@ -14,6 +14,14 @@ class ActorAPIList(generics.ListCreateAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
     permission_classes = [IsAdminUser]
+    
+    def get_queryset(self): #получить queryset напрямую из класса self.queryset нельзя нужно использовать метод
+        queryset = Actor.objects.all()
+        serializered_queryset = ActorSerializer(queryset,many=True)
+        return serializered_queryset.data
+
+    def list(self, request):
+        return Response({'list':self.get_queryset(),'user': str(request.user)}) #str нужен для сериализации в строку для json
 
 
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -25,7 +33,7 @@ class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
 class ActorAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsAdminUser]
 
 # class ActorViewSet(viewsets.ModelViewSet):
 #     queryset = Actor.objects.all()
