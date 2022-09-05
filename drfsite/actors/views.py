@@ -1,6 +1,6 @@
 from rest_framework.views import *
 from rest_framework import viewsets
-
+from rest_framework.authentication import *
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly 
 from .serializers import *
 from .models import *
@@ -28,7 +28,8 @@ class ActorAPIList(generics.ListCreateAPIView):
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
 
 
 class ActorAPIDestroy(generics.RetrieveDestroyAPIView):

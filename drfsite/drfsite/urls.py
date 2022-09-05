@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 from actors.views import *
 
@@ -24,8 +24,10 @@ from actors.views import *
 
 urlpatterns = [#закрывать url/
     path('admin/', admin.site.urls),
-    path('api/v1/auth/', include('rest_framework.urls')),#cookies авторизация
+    path('api/v1/drf-auth/', include('rest_framework.urls')),#cookies авторизация
     path('api/v1/actors/', ActorAPIList.as_view()),
     path('api/v1/actors/<int:pk>/', ActorAPIUpdate.as_view()),
     path('api/v1/actors/delete/<int:pk>/', ActorAPIDestroy.as_view()),
+    path(r'api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]
