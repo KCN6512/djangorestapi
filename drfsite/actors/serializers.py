@@ -10,6 +10,7 @@ class ActorSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'content', 'time_create', 'time_update', 'cat','slug','category_name','user']
         read_only_fields = ('slug', 'category_name')
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
