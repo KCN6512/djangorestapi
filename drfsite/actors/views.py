@@ -13,7 +13,7 @@ from rest_framework.permissions import *
 class ActorAPIList(generics.ListCreateAPIView):
     #queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self): #получить queryset напрямую из класса self.queryset нельзя нужно использовать метод
         #is_valid нужен для ДЕсериализации
@@ -29,7 +29,7 @@ class ActorAPIList(generics.ListCreateAPIView):
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     #authentication_classes = [TokenAuthentication]
 
 class ActorAPIDestroy(generics.RetrieveDestroyAPIView):
