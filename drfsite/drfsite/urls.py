@@ -23,6 +23,7 @@ from actors.views import *
 # router.register(r'category', CategoryViewSet)
 
 urlpatterns = [#закрывать url/
+    path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     path('api/v1/drf-auth/', include('rest_framework.urls')),#cookies авторизация
     path('api/v1/actors/', ActorAPIList.as_view()),
