@@ -21,7 +21,7 @@ class ActorAPIList(generics.ListCreateAPIView):
         queryset = Actor.objects.all().select_related('cat')
         return queryset
 
-    # def list(self, request) -> Response:
+    # def list(self, request):
     #     return Response({'list':self.get_queryset(),'user': str(request.user)}) #str нужен для сериализации в строку для json
 
 
