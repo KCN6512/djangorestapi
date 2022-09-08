@@ -19,11 +19,10 @@ class ActorAPIList(generics.ListCreateAPIView):
         #is_valid нужен для ДЕсериализации
         #если используется то self.queryset можно не определять
         queryset = Actor.objects.all().select_related('cat')
-        serializered_queryset = ActorSerializer(queryset,many=True)
-        return serializered_queryset.data
+        return queryset
 
-    def list(self, request):
-        return Response({'list':self.get_queryset(),'user': str(request.user)}) #str нужен для сериализации в строку для json
+    # def list(self, request) -> Response:
+    #     return Response({'list':self.get_queryset(),'user': str(request.user)}) #str нужен для сериализации в строку для json
 
 
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
