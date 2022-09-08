@@ -34,7 +34,7 @@ class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
 class ActorAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorSerializer
-    #permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser]
 
 # class ActorViewSet(viewsets.ModelViewSet):
 #     queryset = Actor.objects.all()
