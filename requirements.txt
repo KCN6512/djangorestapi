@@ -8,6 +8,7 @@ cryptography==37.0.4
 defusedxml==0.7.1
 Django==4.1
 django-autoslug==1.9.8
+django-debug-toolbar==3.6.0
 django-templated-mail==1.1.1
 djangorestframework==3.13.1
 djangorestframework-simplejwt==4.8.0
