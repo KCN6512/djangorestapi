@@ -1,15 +1,14 @@
-from rest_framework.views import *
-from rest_framework import viewsets
-from rest_framework.authentication import *
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly 
-from .serializers import *
-from .models import *
-from rest_framework.decorators import action
-from rest_framework import generics
-#py drfsite/manage.py runserver
-from rest_framework.permissions import *
 from django.db.models import *
 from django.db.models.functions import Length
+from rest_framework import generics, viewsets
+from rest_framework.authentication import *
+from rest_framework.decorators import action
+from rest_framework.permissions import *
+from rest_framework.views import *
+
+from .models import *
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .serializers import *
 
 
 class ActorAPIList(generics.ListCreateAPIView):
