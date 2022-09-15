@@ -9,7 +9,8 @@ class ActorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Actor
-        fields = ['id', 'title', 'content', 'time_create', 'time_update', 'cat','slug', 'category_name', 'user', 'creator_user']
+        fields = ['id', 'title', 'content', 'time_create', 'time_update', 'cat',
+        'slug', 'category_name', 'user', 'creator_user']
         read_only_fields = ('slug', 'category_name')
 
 
@@ -21,7 +22,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 # Validators
-# Individual fields on a serializer can include validators, by declaring them on the field instance, for example:
+# Individual fields on a serializer can include validators, 
+# by declaring them on the field instance, for example:
 
 # def multiple_of_ten(value):
 #     if value % 10 != 0:

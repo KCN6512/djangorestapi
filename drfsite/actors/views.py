@@ -8,6 +8,8 @@ from rest_framework.decorators import action
 from rest_framework import generics
 #py drfsite/manage.py runserver
 from rest_framework.permissions import *
+from django.db.models import *
+from django.db.models.functions import Length
 
 
 class ActorAPIList(generics.ListCreateAPIView):
@@ -18,11 +20,12 @@ class ActorAPIList(generics.ListCreateAPIView):
     def get_queryset(self): #получить queryset напрямую из класса self.queryset нельзя нужно использовать метод
         #is_valid нужен для ДЕсериализации
         #если используется то self.queryset можно не определять
-        queryset = Actor.objects.all().select_related('cat', 'user')
+        queryset = Actor.objects.annotate(symbol_counts=Length('content')).select_related('cat', 'user')
         return queryset
 
     # def list(self, request):
-    #     return Response({'list':self.get_queryset(),'user': str(request.user)}) #str нужен для сериализации в строку для json
+    #     return Response({'list':self.get_queryset(),'user': str(request.user)}) 
+    # #str нужен для сериализации в строку для json
 
 
 class ActorAPIUpdate(generics.RetrieveUpdateAPIView):
