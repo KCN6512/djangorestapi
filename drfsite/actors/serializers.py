@@ -7,11 +7,12 @@ class ActorSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='cat.name',read_only=True)
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     creator_user = serializers.CharField(source='user.username', read_only=True)
+    symbol_counts = serializers.IntegerField()
 
     class Meta:
         model = Actor
         fields = ['id', 'title', 'content', 'time_create', 'time_update', 'cat',
-        'slug', 'category_name', 'user', 'creator_user']
+        'slug', 'category_name', 'user', 'creator_user', 'symbol_counts']
         read_only_fields = ('slug', 'category_name')
 
 
