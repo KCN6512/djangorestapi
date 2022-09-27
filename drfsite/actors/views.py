@@ -38,9 +38,13 @@ class ActorAPIDestroy(generics.RetrieveDestroyAPIView):
     serializer_class = ActorSerializer
     permission_classes = [IsAdminUser]
 
-# class ActorViewSet(viewsets.ModelViewSet):
-#     queryset = Actor.objects.all()
-#     serializer_class = ActorSerializer
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    @action(detail=True, methods=['get'])
+    def func(self, request, pk=None):
+        return Response({'pk=': pk})
     
 #     def get_queryset(self):
 #         pk = self.kwargs.get('pk')

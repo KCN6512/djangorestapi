@@ -19,9 +19,8 @@ from rest_framework import routers
 
 from actors.views import *
 
-# router = routers.DefaultRouter()
-# router.register(r'actors', ActorViewSet)#при отсутствии queryset во view нужно указать basename='name'
-# router.register(r'category', CategoryViewSet)
+router = routers.DefaultRouter()
+router.register(r'category', CategoryViewSet)#при отсутствии queryset во view нужно указать basename='name'
 
 urlpatterns = [#закрывать url/
     path('__debug__/', include('debug_toolbar.urls')),
@@ -32,4 +31,5 @@ urlpatterns = [#закрывать url/
     path('api/v1/actors/delete/<int:pk>/', ActorAPIDestroy.as_view()),
     path(r'api/v1/auth/', include('djoser.urls')),
     re_path(r'^auth/', include('djoser.urls.authtoken')),
-]
+] 
+urlpatterns += router.urls

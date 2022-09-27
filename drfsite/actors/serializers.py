@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-from custom_validators import *
+from .custom_validators import *
 
 
 class ActorSerializer(serializers.ModelSerializer):
