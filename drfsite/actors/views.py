@@ -7,7 +7,7 @@ from rest_framework.permissions import *
 from rest_framework.views import *
 
 from .models import *
-from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 from .serializers import *
 
 
@@ -19,7 +19,7 @@ class ActorAPIList(generics.ListCreateAPIView):
     def get_queryset(self): #получить queryset напрямую из класса self.queryset нельзя нужно использовать метод
         #is_valid нужен для ДЕсериализации
         #если используется то self.queryset можно не определять
-        queryset = Actor.objects.annotate(symbol_counts=Length('content')).select_related('cat', 'user')
+        queryset = Actor.objects.select_related('cat', 'user')
         return queryset
 
     # def list(self, request):
