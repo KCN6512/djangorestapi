@@ -44,7 +44,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def func(self, request, pk=None):
-        return Response({'pk=': pk})
+        return Response({'pk= ': pk})
     
 #     def get_queryset(self):
 #         pk = self.kwargs.get('pk')
